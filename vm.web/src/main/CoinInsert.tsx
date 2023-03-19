@@ -35,6 +35,7 @@ const CoinInsert = (Props: coinProps)  => {
 
     return (
         <div>
+            <div className="row">
             <h3>Enter coins</h3>
             <p>Valid coins include 1p, 2p, 5p, 10p, 20p, 50p, £1, £2</p>
             <input
@@ -45,16 +46,20 @@ const CoinInsert = (Props: coinProps)  => {
                     setNewCoin(e.target.value)
                   }     
             >
-            </input>
-            <button className="btn btn-primary" onClick={addNewCoin}>
-             Add
-            </button>
-            <button className="btn btn-primary" onClick={returnCoins}>
+            </input>    
+            </div>
+            <div className="row m-1">
+            <div className="col-4"><button className="btn btn-primary p-1 m-1 h-100 w-100" onClick={addNewCoin}>
+             Add coinInput
+            </button></div>
+            <div className="col-4"><button className="btn btn-primary p-1 m-1 h-100 w-100" onClick={returnCoins}>
                 return coins
-            </button>
-            <button className="btn btn-primary" onClick={takeCoins}>
-                take returned coins``
-            </button>
+            </button></div>
+            <div className="col-4"><button className="btn btn-primary p-1 m-1 h-100 w-100" onClick={takeCoins}>
+                take returned coins
+            </button></div>
+            </div>
+            
         </div>
     )
 
