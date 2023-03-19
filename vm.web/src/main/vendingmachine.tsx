@@ -16,9 +16,13 @@ const VendingMachine = () => {
         setReturns(newReturns);
     }
 
-    const resetCoins = () => {
-        setReturns("");
+    const resetCredit = () => {
         setCurrentCredit(0);
+    }
+
+    const takeCoins = () =>
+    {
+        setReturns("");
     }
 
     return (       
@@ -27,10 +31,10 @@ const VendingMachine = () => {
         <p>returned coins: {returnCoin}</p>
         <div className='row'>
             <div className='col-4'>   
-                <CoinInsert addCredit={addCredit} addReturn={addReturnedCoin}/>                    
+                <CoinInsert addCredit={addCredit} addReturn={addReturnedCoin} takeCoins={takeCoins} resetCredit={resetCredit} currentCredit={credit}/>                    
             </div>
             <div className='col-8'>
-                <ProductList resetCoins={resetCoins} currentCredit={credit}/>
+                <ProductList resetCoins={resetCredit} addReturn={addReturnedCoin} currentCredit={credit} />
             </div>
         </div>
       </div>

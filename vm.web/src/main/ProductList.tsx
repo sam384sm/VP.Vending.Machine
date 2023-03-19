@@ -3,6 +3,7 @@ import config, { currencyFormatter } from "../config";
 import ApiHelper from "../helpers/ApiHelper";
 import fetchProductsViaAPI from "../helpers/ApiHelper"; 
 import dispenseProductsViaAPI  from "../helpers/ApiHelper";
+import getMinimumCoins from "../helpers/MinCoinHelper";
 import { productListProps } from "../helpers/PropsHelper";
 import { Product } from "../types/product";
 
@@ -18,6 +19,8 @@ const ProductList = (Props: productListProps) =>{
 
     const  productSelect = async (productId: number, productPrice: number) => {
         if (Props.currentCredit >= productPrice){
+            var change = getMinimumCoins(Props.currentCredit - productPrice);
+            Props.addReturn(change);
             Props.resetCoins();
             await ApiHelper.dispenseProductsViaAPI(productId);
             setProductList(await ApiHelper.fetchProductsViaAPI());

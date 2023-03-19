@@ -1,18 +1,19 @@
 import { useState } from "react";
+import getMinimumCoins from "../helpers/MinCoinHelper";
 import { coinProps } from "../helpers/PropsHelper";
 
 const CoinInsert = (Props: coinProps)  => {
     const [newCoin, setNewCoin] = useState("");
     
     const validCoins = new Map<string, number>([
-        ["1p", 0.01],
-        ["2p", 0.02],
-        ["5p", 0.05],
-        ["10p", 0.10],
-        ["20p", 0.20],
-        ["50p", 0.50],
-        ["£1", 1.00],
         ["£2", 2.00],
+        ["£1", 1.00],
+        ["50p", 0.50],        
+        ["20p", 0.20],
+        ["10p", 0.10],        
+        ["5p", 0.05],        
+        ["2p", 0.02],
+        ["1p", 0.01],      
     ]);
 
     const addNewCoin = () => {
@@ -21,6 +22,15 @@ const CoinInsert = (Props: coinProps)  => {
         } else {
             Props.addReturn(newCoin);
         }        
+    }
+
+    const returnCoins = () => {
+        Props.addReturn(getMinimumCoins(Props.currentCredit));
+        Props.resetCredit();
+    }
+
+    const takeCoins = () => {
+        Props.takeCoins();
     }
 
     return (
@@ -38,6 +48,12 @@ const CoinInsert = (Props: coinProps)  => {
             </input>
             <button className="btn btn-primary" onClick={addNewCoin}>
              Add
+            </button>
+            <button className="btn btn-primary" onClick={returnCoins}>
+                return coins
+            </button>
+            <button className="btn btn-primary" onClick={takeCoins}>
+                take returned coins``
             </button>
         </div>
     )
