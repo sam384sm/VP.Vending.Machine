@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { coinProps } from "./coinProps";
+import { coinProps } from "../helpers/PropsHelper";
 
 const CoinInsert = (Props: coinProps)  => {
     const [newCoin, setNewCoin] = useState("");

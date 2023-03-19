@@ -1,5 +1,7 @@
 import {useState } from "react"
 import CoinInsert from "./CoinInsert";
+import ProductList from "./ProductList";
+import { currencyFormatter } from "../config";
 
 const VendingMachine = () => {
     const [credit, setCurrentCredit] = useState(0);    
@@ -14,13 +16,21 @@ const VendingMachine = () => {
         setReturns(newReturns);
     }
 
+    const resetCoins = () => {
+        setReturns("");
+        setCurrentCredit(0);
+    }
+
     return (       
         <div className='container'>
-        <p>current credit: {credit}</p>
+        <p>current credit: {currencyFormatter.format(credit)}</p>
         <p>returned coins: {returnCoin}</p>
         <div className='row'>
             <div className='col-4'>   
                 <CoinInsert addCredit={addCredit} addReturn={addReturnedCoin}/>                    
+            </div>
+            <div className='col-8'>
+                <ProductList resetCoins={resetCoins} currentCredit={credit}/>
             </div>
         </div>
       </div>
