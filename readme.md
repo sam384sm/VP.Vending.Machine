@@ -14,5 +14,6 @@ To start the web api open a command window from the route folder and run the fol
 To start the front end open a command window from the route folder and run the following two commands.
 ``` cmd
  cd vm.web
+ npm install
  npm start
 ```
