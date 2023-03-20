@@ -8,7 +8,8 @@ export interface coinProps {
 }
 
 export interface productListProps {
-    resetCoins: () => void;
+    resetCredit: () => void;
     addReturn: (returnedCoin: string) => void;
+    dispenseItem: (item: string) => void;
     currentCredit: number;    
 }

@@ -6,6 +6,7 @@ import { currencyFormatter } from "../config";
 const VendingMachine = () => {
     const [credit, setCurrentCredit] = useState(0);    
     const [returnCoin, setReturns] = useState("");
+    const [dispensedItem, setDispensedItem] = useState("");
 
     const addCredit = (additionalCredit: number) => {
         setCurrentCredit(credit + additionalCredit);
@@ -25,16 +26,21 @@ const VendingMachine = () => {
         setReturns("");
     }
 
+    const setDispenseItem = (item: string) => {
+        setDispensedItem(item);
+    }
+
     return (       
         <div className='container'>
         <p>current credit: {currencyFormatter.format(credit)}</p>
         <p>returned coins: {returnCoin}</p>
+        <p>Product dispensed: {dispensedItem}</p>
         <div className='row'>
             <div className='col-4'>   
                 <CoinInsert addCredit={addCredit} addReturn={addReturnedCoin} takeCoins={takeCoins} resetCredit={resetCredit} currentCredit={credit}/>                    
             </div>
             <div className='col-8'>
-                <ProductList resetCoins={resetCredit} addReturn={addReturnedCoin} currentCredit={credit} />
+                <ProductList resetCredit={resetCredit} addReturn={addReturnedCoin} dispenseItem={setDispenseItem} currentCredit={credit} />
             </div>
         </div>
       </div>
