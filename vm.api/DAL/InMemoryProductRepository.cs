@@ -10,18 +10,21 @@ public class InMemoryProductRepository : IProductRepository
                 ProductName = "cola",
                 Price = 1.00m,
                 ProductCount = 2,
+                ExactChangeRequired = true,
             },
             new Product {
                 ID = 2,
                 ProductName = "crisps",
                 Price = 0.50m,
                 ProductCount = 2,
+                ExactChangeRequired = false,
             },
             new Product {
                 ID = 3,
                 ProductName = "chocolate",
                 Price = 0.65m,
                 ProductCount = 1,
+                ExactChangeRequired = false,
             },
 
         };
@@ -39,8 +42,7 @@ public class InMemoryProductRepository : IProductRepository
     public IEnumerable<ProductDto> GetProducts()
     {
         return _products
-               .Where(x => x.ProductCount > 0)
-               .Select(x => new ProductDto(x.ID, x.ProductName, x.Price))
+               .Select(x => new ProductDto(x.ID, x.ProductName, x.Price, x.ProductCount <= 0, x.ExactChangeRequired ))
                .ToArray();
     }
 }

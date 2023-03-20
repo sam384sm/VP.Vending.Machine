@@ -1,1 +1,1 @@
-public record ProductDto(int Id, string? ProductName, decimal Price);
+public record ProductDto(int Id, string? ProductName, decimal Price, bool soldOut, bool ExactChangeRequired);

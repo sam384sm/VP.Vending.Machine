@@ -17,9 +17,11 @@ const ProductList = (Props: productListProps) =>{
         fetchProducts();    
     }, []);
 
-    const  productSelect = async (productId: number, productPrice: number) => {
-        if (Props.currentCredit >= productPrice){
-            var change = getMinimumCoins(Props.currentCredit - productPrice);
+    const  productSelect = async (productId: number, productPrice: number, soldOut: boolean, exactChangeRequired: boolean) => {
+        if (soldOut !== false) {
+            alert('Product unavailable');
+        } else if (Props.currentCredit >= productPrice){
+            var change = exactChangeRequired ? "" : getMinimumCoins(Props.currentCredit - productPrice);
             Props.addReturn(change);
             Props.resetCoins();
             await ApiHelper.dispenseProductsViaAPI(productId);
@@ -37,14 +39,18 @@ const ProductList = (Props: productListProps) =>{
                 <tr>
                     <th>Product</th>
                     <th>Price</th>
+                    <th>Available?</th>
+                    <th>Requires exact change?</th>
                 </tr>
                 </thead>
                 <tbody>
                 {products &&
                     products.map((p: Product) => (
-                    <tr key={p.id} onClick={() => productSelect(p.id, p.price)}>
+                    <tr key={p.id} onClick={() => productSelect(p.id, p.price, p.soldOut, p.exactChangeRequired)}>
                         <td>{p.productName}</td>
                         <td>{currencyFormatter.format(p.price)}</td>
+                        <td>{p.soldOut ? "N" : "Y"}</td>
+                        <td>{p.exactChangeRequired ? "Y" : "N"}</td>
                     </tr>
                     ))}
                 </tbody>
